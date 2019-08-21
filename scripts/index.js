@@ -8,8 +8,8 @@
 
 function main() {
   shoppingList.bindEventListeners();
-  const itemNames = [ '', 'apples', 'pears' ];
-  itemNames.forEach(name => {
+  /* const itemName = [ '', 'apples', 'pears' ];
+ /*  itemNames.forEach(name => {
     try {
       Item.validateName(name);
       store.items.push(Item.create(name));
@@ -17,7 +17,7 @@ function main() {
     // eslint-disable-next-line no-console
       console.log('Cannot add item: ' + error.message);
     }
-  });
+  }); */ 
   shoppingList.render();
 }
 
