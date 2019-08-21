@@ -61,18 +61,20 @@ const shoppingList = (function(){
       Item.validateName(itemName);
       let newItem = Item.create(itemName);
       store.items.push(newItem);
-      render();
     }catch(error){
       console.log('Cannot add item: {error.message}');
     }
-    //store.items.push({ id: cuid(), name: itemName, checked: false });
   }
   
   function handleNewItemSubmit() {
-    store.findAndUpdateName();
+    $('#js-shopping-list-form').submit(function (event) {
+      event.preventDefault();
+      const newItemName = $('.js-shopping-list-entry').val();
+      $('.js-shopping-list-entry').val('');
+      addItemToShoppingList(newItemName);
+      render();
+    });
   }
-  
-
   
   
   function getItemIdFromElement(item) {
@@ -80,20 +82,25 @@ const shoppingList = (function(){
       .closest('.js-item-element')
       .data('item-id');
   }
-  
+
   function handleItemCheckClicked() {
-    store.findAndToggleChecked();
+    $('.js-shopping-list').on('click', '.js-item-toggle', event => {
+      const id = getItemIdFromElement(event.currentTarget);
+      store.findAndToggleChecked(id);
+      render();
+    });
   }
 
-  
- 
-  
- 
-  
-  
   function handleDeleteItemClicked() {
-
-    store.findAndDelete();
+    // like in `handleItemCheckClicked`, we use event delegation
+    $('.js-shopping-list').on('click', '.js-item-delete', event => {
+      // get the index of the item in store.items
+      const id = getItemIdFromElement(event.currentTarget);
+      // delete the item
+      store.findAndDelete(id);
+      // render the updated shopping list
+      render();
+    });
   }
   
   function handleEditShoppingItemSubmit() {
@@ -107,11 +114,18 @@ const shoppingList = (function(){
   }
   
   function handleToggleFilterClick() {
-    store.toggleCheckedItemsFilter();
+    $('.js-filter-checked').click(() => {
+      store.toggleCheckedFilter();
+      render();
+    });
   }
   
   function handleShoppingListSearch() {
-    store.setSearchTerm();
+    $('.js-shopping-list-search-entry').on('keyup', event => {
+      const val = $(event.currentTarget).val();
+      store.setSearchTerm(val);
+      render();
+    });
   }
   
   function bindEventListeners() {
@@ -128,4 +142,5 @@ const shoppingList = (function(){
     render,
     bindEventListeners
   };
+
 }());

@@ -1,8 +1,6 @@
 'use strict';
 /* global cuid */
 
-
-
 const store = (function () {
   const items = [
     { id: cuid(), name: 'apples', checked: false },
@@ -12,51 +10,48 @@ const store = (function () {
   ];
   let hideCheckedItems = false;
   let searchTerm = '';
-  let findById = function findById(idNum) {
-    return store.items.find(item => item.id === idNum)
+
+  let findById = function findById(item) {
+    this.items.find(item => item.id === id)
   };
-  let addItem = function addItems(name) {
+
+  const addItem = function addItems(name) {
     try {
       Item.validateName(name);
       let newItem = Item.create(name);
       this.items.push(newItem);
     }
     catch (error) {
-      console.log('Cannot add item: {error.message}');
+      console.log('Cannot add item');
     }
   };
 
-  let findAndToggleChecked = function findAndToggleChecked(idNum) {
-    let item = this.findById(idNum);
-    if (item.checked === true) {
-      item.checked = false;
-    }
-    if (item.checked === false) {
-      item.checked = true;
-    }
+  const findAndToggleChecked = function findAndToggleChecked(id) {
+    const toggledItem = store.items.find(item => item.id === id);
+    toggledItem.checked = !toggledItem.checked;
   };
 
-  let toggleCheckedFilter = function toggleCheckedItemsFilter() {
-    this.hideCheckedItems = !this.hideCheckedItems;
+  const toggleCheckedFilter = function toggleCheckedFilter() {
+    store.hideCheckedItems = !store.hideCheckedItems;
   };
 
-  let findAndUpdateName = function findAndUpdateName(id, newName) {
+  const findAndUpdateName = function findAndUpdateName(id, newName) {
     try {
       Item.validateName(newName);
       let namedItem = this.findById(id);
       namedItem.name = newName;
     }
     catch (error) {
-      console.log('This is an error message');
+      console.log('Cannot rename item');
     }
   };
 
-  let findAndDelete = function findAndDelete(id) {
+  const findAndDelete = function findAndDelete(id) {
     const index = store.items.findIndex(item => item.id === id);
     store.items.splice(index, 1);
   };
 
-  let setSearchTerm = function setsearchTerm(val) {
+  const setSearchTerm = function setsearchTerm(val) {
     store.searchTerm = val;
   };
 
