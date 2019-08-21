@@ -1,6 +1,7 @@
 'use strict';
 /* global cuid */
 
+<<<<<<< HEAD
 
 const Item = (function () {
   const validateName = function(name) {
@@ -23,4 +24,8 @@ const Item = (function () {
   };
 })();
 
+=======
+const Item = (function () {
+
+>>>>>>> 410963191fcc05b3c8ed43e7ff887f375241fc5d
 
