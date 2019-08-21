@@ -11,7 +11,7 @@ const store = (function () {
     { id: cuid(), name: 'bread', checked: false }
   ];
   let hideCheckedItems = false;
-  let searchTerm = ' ';
+  let searchTerm = '';
   let findById = function findById(idNum) {
     return store.items.find(item => item.id === idNum)
   };
