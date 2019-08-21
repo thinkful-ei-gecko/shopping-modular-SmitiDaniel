@@ -21,8 +21,6 @@ function main() {
   shoppingList.render();
 }
 
-console.log(Item);
-console.log(store);
 
 $(main);
 

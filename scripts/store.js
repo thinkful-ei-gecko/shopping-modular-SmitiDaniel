@@ -36,6 +36,10 @@ const store = (function () {
     }
   };
 
+  let toggleCheckedFilter = function toggleCheckedItemsFilter() {
+    this.hideCheckedItems = !this.hideCheckedItems;
+  };
+
   let findAndUpdateName = function findAndUpdateName(id, newName) {
     try {
       Item.validateName(newName);
@@ -52,6 +56,10 @@ const store = (function () {
     store.items.splice(index, 1);
   };
 
+  let setSearchTerm = function setsearchTerm(val) {
+    store.searchTerm = val;
+  };
+
   
   return {
     items,
@@ -60,21 +68,14 @@ const store = (function () {
     findById,
     addItem,
     findAndToggleChecked,
+    toggleCheckedFilter,
     findAndUpdateName,
-    findAndDelete
+    findAndDelete,
+    setSearchTerm
   };    
 })();
 
 
-
-
-
-
-
-
-  // if (this.findById(idNum).checked) {
-  //   this.findById(idNum).checked === !this.findById(idNum).checked
-  // }
 
 
 
