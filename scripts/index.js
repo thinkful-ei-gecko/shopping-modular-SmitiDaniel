@@ -10,10 +10,6 @@ function main() {
   shoppingList.render();
 }
 
-console.log(Item);
-console.log(foo);
-console.log(store);
-
 $(main);
 
 
