@@ -11,8 +11,8 @@ const store = (function () {
   let hideCheckedItems = false;
   let searchTerm = '';
 
-  let findById = function findById(item) {
-    this.items.find(item => item.id === id)
+  let findById = function findById(id) {
+    return store.items.find(item => item.id === id)
   };
 
   const addItem = function addItems(name) {
@@ -27,7 +27,7 @@ const store = (function () {
   };
 
   const findAndToggleChecked = function findAndToggleChecked(id) {
-    const toggledItem = store.items.find(item => item.id === id);
+    const toggledItem = this.findById(id);
     toggledItem.checked = !toggledItem.checked;
   };
 
